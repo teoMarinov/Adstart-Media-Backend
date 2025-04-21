@@ -74,13 +74,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException expiredJwtException) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN); // Set 403 status
-            // No need to write a body, as per your requirement
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         } catch (MalformedJwtException | SignatureException | IllegalArgumentException e) {
-            // Handle other JWT related exceptions as unauthorized (401) or forbidden (403) as needed
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Or SC_FORBIDDEN
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } catch (Exception exception) {
-            // For other unexpected exceptions, you might still want to use the resolver
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
     }

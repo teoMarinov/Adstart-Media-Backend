@@ -38,8 +38,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(HttpMethod.OPTIONS, "/quote-request").permitAll()
                         .requestMatchers(HttpMethod.POST, "/quote-request").permitAll()
+                        .requestMatchers("/subscribe").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

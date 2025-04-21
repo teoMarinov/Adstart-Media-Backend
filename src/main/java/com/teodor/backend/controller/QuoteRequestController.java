@@ -14,6 +14,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController()
+@CrossOrigin("*")
 @RequestMapping("/quote-request")
 public class QuoteRequestController {
     private final QuoteRequestService quoteRequestService;
@@ -23,7 +24,6 @@ public class QuoteRequestController {
     }
 
     @PostMapping("")
-    @CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<QuoteRequest>> createRequest(@RequestBody @Valid QuoteRequestDto requestDto) {
         BaseResponseDto<QuoteRequest> baseResponseDto = new BaseResponseDto<>();
 
