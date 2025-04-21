@@ -41,7 +41,11 @@ public class SecurityConfig {
                         .requestMatchers("/subscribe").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
