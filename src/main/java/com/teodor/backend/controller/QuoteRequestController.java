@@ -7,14 +7,12 @@ import com.teodor.backend.service.QuoteRequestService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Optional;
 
-@Validated
 @RestController()
 @RequestMapping("/quote-request")
 public class QuoteRequestController {
@@ -24,7 +22,8 @@ public class QuoteRequestController {
         this.quoteRequestService = quoteRequestService;
     }
 
-    @PostMapping()
+    @PostMapping("")
+    @CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<QuoteRequest>> createRequest(@RequestBody @Valid QuoteRequestDto requestDto) {
         BaseResponseDto<QuoteRequest> baseResponseDto = new BaseResponseDto<>();
 
