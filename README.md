@@ -76,11 +76,17 @@ SPRING_ADMIN_ACCOUNT_PASSWORD=your_admin_password
 
 ## 🛠️ Additional IntelliJ Setup
 
-### ✅ Check EnvFile Plugin Settings
+### ✅ Configure Run/Debug Configuration and EnvFile
 
-- Make sure **Modify options** has **EnvFile** checked.
-- Ensure **Enable EnvFile** is checked and the correct path to your `.env` file is provided.
-
+1. Go to **Run > Edit Configurations**
+2. On the left side, click **Add New Configuration** and select **Application**
+3. Under **Modify options**, make sure both **Environment variables** and **EnvFile** are selected
+4. For **Main class**, select `AdstartMediaBackendApplication`
+5. Below **Working directory**, in the **Environment variables** section:
+   - Click the 📁 icon and select your `.env` file
+6. At the bottom check **Enable EnvFile**
+7. Click the **+** icon, choose **.env file**, and select the same `.env` file you added above
+8. Click **Apply**, then **OK**
 ---
 
 ### ⚙️ Fix Annotation Processor Issues (Setters/Getters)
@@ -91,7 +97,7 @@ If you encounter errors related to missing setters and getters:
 2. Under the **Build, Execution, Deployment** tab, open **Compiler > Annotation Processors**
 3. On the left side, open the annotation profile for  
    `Adstart Media Backend -> backend`
-4. Change **Obtain processors from** to `Project classpath` instead of `Processor path`
+4. Change **Obtain processors from** to `Obtain proccessor from project classpath` instead of `Processor path`
 5. Click **Apply** and **OK`
 
 Setters and getters should now be processed correctly.
