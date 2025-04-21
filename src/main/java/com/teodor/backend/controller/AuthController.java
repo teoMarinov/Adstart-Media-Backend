@@ -12,8 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Validated
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/auth")
 public class AuthController {
     private final JwtService jwtService;
