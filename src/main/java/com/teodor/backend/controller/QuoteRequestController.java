@@ -6,11 +6,13 @@ import com.teodor.backend.entity.QuoteRequest;
 import com.teodor.backend.service.QuoteRequestService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController()
@@ -41,12 +43,21 @@ public class QuoteRequestController {
 
     @GetMapping("")
     public ResponseEntity<BaseResponseDto<Page<QuoteRequest>>> getAllRequests(
-            @RequestParam(defaultValue = "0") int page
-    ) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(required = false) String service,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate fromDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate toDate
+            ) {
         int pageSize = 10;
         BaseResponseDto<Page<QuoteRequest>> baseResponseDto = new BaseResponseDto<>();
 
-        Page<QuoteRequest> requests = quoteRequestService.getAllQuoteRequests(page, pageSize);
+        Page<QuoteRequest> requests = quoteRequestService.getAllQuoteRequests(
+                page,
+                pageSize,
+                service,
+                fromDate,
+                toDate
+                );
         baseResponseDto.setSuccessResult(requests);
 
         return ResponseEntity.ok(baseResponseDto);
