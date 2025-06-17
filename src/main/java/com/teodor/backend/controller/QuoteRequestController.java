@@ -24,7 +24,7 @@ public class QuoteRequestController {
     }
 
     @PostMapping("")
-    public ResponseEntity<BaseResponseDto<QuoteRequest>> createRequest(@RequestBody @Valid QuoteRequestDto requestDto) {
+    public ResponseEntity<BaseResponseDto<QuoteRequest>> createQuoteRequest(@RequestBody @Valid QuoteRequestDto requestDto) {
         BaseResponseDto<QuoteRequest> baseResponseDto = new BaseResponseDto<>();
 
         QuoteRequest createdRequest = quoteRequestService.createQuoteRequest(requestDto);
